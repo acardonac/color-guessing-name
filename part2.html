@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <title>JavaScript Color Guessing Game</title>
+  </head>
+
+  <body onload="do_game()">
+
+    <script type="text/javascript">
+
+      var colors = ["blue", "green", "orange", "red", "white", "yellow"];
+      colors = colors.sort();
+      var colors_separate = colors.join(" | ");
+      var target_index = Math.floor(Math.random() * (colors.length - 0)) + 0;;
+      var target = colors[target_index];
+      var guess_input;
+      var finished = false;
+      var guesses = 0;
+
+      alert("The correct answer is: " + target);
+
+      function do_game() {
+
+  				while (!finished) {
+  					guess_input = prompt("I am thinking of one of these colors: \n\n" +
+            colors_separate + "\n\n What color am I thinking of?").toLowerCase();
+  					guesses++;
+  					finished = check_guess(guess_input,target);
+
+  					if (finished) {
+  						var myBody = document.getElementsByTagName("body")[0];
+  						myBody.style.background = target;
+  						alert("Congratulations! You have guessed the color! \n\n It took you " + guesses + " guesses to finish the game!\n\nYou can see the colour in the background.");
+  					}
+
+  				}
+
+  				var myBody = document.getElementsByTagName("body")[0];
+  				myBody.style.background = target;
+
+        }
+
+        function check_guess(guess, target) {
+
+  				if (colors.indexOf(guess) < 0) {
+  					alert("Sorry, I don't recognize your color. \n\n Please try again.");
+  					return false;
+  				}
+          else if(guess > target) {
+  					alert("Sorry, your guess is not correct! \n\n Hint: Your color is alphabetically higher than mine.\n\nPlease try again.");
+            return false;
+  				}
+          else if (guess < target) {
+  					alert("Sorry, your guess is not correct! \n\n Hint: Your color is alphabetically lower than mine.\n\nPlease try again.");
+            return false;
+  				}
+          else {
+  					return true;
+  				}
+  			}
+
+    </script>
+
+  </body>
+
+</html>
